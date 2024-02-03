@@ -81,10 +81,11 @@ public class MailTest {
     @Test(priority = 2)
     public void clickRecaptcha(){
         // https://stackoverflow.com/a/55264777
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name,'a-')]")));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span.recaptcha-checkbox")));
         element.click();
+        driver.switchTo().defaultContent();
     }
 
     @Test(priority = 3)
@@ -94,5 +95,12 @@ public class MailTest {
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.delay(23);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    }
+
+    @Test(priority = 4)
+    public void continueRecaptcha() throws InterruptedException {
+        Thread.sleep(5000);
+        WebElement button = driver.findElement(By.xpath("//*[contains(text(), 'Next')]"));
+        button.click();
     }
 }
