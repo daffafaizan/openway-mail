@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -15,6 +14,7 @@ import java.awt.event.InputEvent;
 import java.io.File;
 import java.time.Duration;
 import java.util.Collections;
+import java.util.Random;
 
 public class MailTest {
     WebDriver driver;
@@ -81,7 +81,7 @@ public class MailTest {
     @Test(priority = 2)
     public void clickRecaptcha(){
         // https://stackoverflow.com/a/55264777
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name,'a-')]")));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span.recaptcha-checkbox")));
         element.click();
@@ -93,13 +93,22 @@ public class MailTest {
         Thread.sleep(5000);
         robot.mouseMove(driver.manage().window().getPosition().x + 390, driver.manage().window().getPosition().y + 760);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        robot.delay(23);
+        robot.delay(25);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }
 
     @Test(priority = 4)
     public void continueRecaptcha() throws InterruptedException {
         Thread.sleep(5000);
+        WebElement button = driver.findElement(By.xpath("//*[contains(text(), 'Next')]"));
+        button.click();
+    }
+
+    @Test(priority = 5)
+    public void inputPassword() throws InterruptedException{
+        Thread.sleep(2000);
+        driver.findElement(By.name("Passwd")).sendKeys(password);
+        Thread.sleep(1000);
         WebElement button = driver.findElement(By.xpath("//*[contains(text(), 'Next')]"));
         button.click();
     }
