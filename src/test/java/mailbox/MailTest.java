@@ -2,7 +2,6 @@ package mailbox;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,9 +9,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.Collections;
-import java.util.Random;
 
 public class MailTest {
     WebDriver driver;
@@ -48,17 +47,9 @@ public class MailTest {
 
         // Other
         options.addArguments("disable-infobars");
+        options.addExtensions(new File("/Users/daffafaizan/Documents/Programming/Projects/openway-mail/src/test/java/mailbox/Buster-Captcha-Solver-for-Humans.crx"));
 
         return options;
-    }
-
-    // Support
-    public Dimension randomDimensions() {
-        Random random = new Random();
-        int width = random.nextInt(800, 1200);
-        int height = random.nextInt(600, 1000);
-
-        return new Dimension(width, height);
     }
 
     @BeforeClass
@@ -80,7 +71,7 @@ public class MailTest {
     }
 
     @Test(priority = 2)
-    public void bypassRecaptcha(){
+    public void clickRecaptcha(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name,'a-')]")));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span.recaptcha-checkbox")));
