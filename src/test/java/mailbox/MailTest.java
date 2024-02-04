@@ -52,7 +52,7 @@ public class MailTest extends AbstractTests {
 
     @Test(priority = 6)
     public void searchUnreadMail() throws InterruptedException {
-        loadPageSleep();
+        redirectPageSleep();
         driver.findElement(By.xpath("//input[@placeholder='Search mail']")).sendKeys("is:unread");
         betweenElementSleep();
         driver.findElement(By.xpath("//input[@placeholder='Search mail']")).sendKeys(Keys.RETURN);

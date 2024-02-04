@@ -47,7 +47,7 @@ public class AbstractTests {
 
         // Other
         options.addArguments("disable-infobars");
-        options.addExtensions(new File(System.getProperty("user.dir") + "src/main/test/java/extensions/Buster-Captcha-Solver-for-Humans.crx"));
+        options.addExtensions(new File(System.getProperty("user.dir") + "/src/test/java/extensions/Buster-Captcha-Solver-for-Humans.crx"));
 
         return options;
     }
@@ -60,6 +60,10 @@ public class AbstractTests {
     }
 
     public void loadPageSleep() throws InterruptedException {
+        Thread.sleep(randomDuration(2500, 3500));
+    }
+
+    public void redirectPageSleep() throws InterruptedException {
         Thread.sleep(randomDuration(6000, 8000));
     }
 
