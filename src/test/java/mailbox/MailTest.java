@@ -9,11 +9,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.awt.*;
-import java.awt.Point;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.time.Duration;
 import java.util.Collections;
+import java.util.Random;
 
 public class MailTest {
     WebDriver driver;
@@ -55,6 +55,22 @@ public class MailTest {
         return options;
     }
 
+    // Support
+    public Duration randomDuration(int start, int finish) {
+        Random random = new Random();
+        int duration = random.nextInt(start, finish);
+        return Duration.ofMillis(duration);
+    }
+
+    public void loadPageSleep() throws InterruptedException {
+        Thread.sleep(randomDuration(3000, 4000));
+    }
+
+    public void betweenElementSleep() throws InterruptedException {
+        Thread.sleep(randomDuration(2000, 3000));
+    }
+
+    // Tests
     @BeforeClass
     public void initialize() throws AWTException {
         robot = new Robot();
@@ -64,44 +80,41 @@ public class MailTest {
 
     @Test(priority = 1)
     public void inputUsername() throws InterruptedException {
-        Thread.sleep(2000);
+        loadPageSleep();
         driver.findElement(By.id("identifierId")).sendKeys(email);
-        Thread.sleep(1000);
+        betweenElementSleep();
         driver.findElement(By.id("identifierNext")).click();
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, enabled = false)
     public void clickRecaptcha(){
         // https://stackoverflow.com/a/55264777
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, randomDuration(4500, 5500));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name,'a-')]")));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span.recaptcha-checkbox")));
-        element.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span.recaptcha-checkbox"))).click();
         driver.switchTo().defaultContent();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, enabled = false)
     public void solveRecaptcha() throws InterruptedException {
-        Thread.sleep(5000);
+        loadPageSleep();
         robot.mouseMove(driver.manage().window().getPosition().x + 390, driver.manage().window().getPosition().y + 760);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.delay(25);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, enabled = false)
     public void continueRecaptcha() throws InterruptedException {
-        Thread.sleep(5000);
-        WebElement button = driver.findElement(By.xpath("//*[contains(text(), 'Next')]"));
-        button.click();
+        loadPageSleep();
+        driver.findElement(By.xpath("//*[contains(text(), 'Next')]")).click();
     }
 
     @Test(priority = 5)
     public void inputPassword() throws InterruptedException{
-        Thread.sleep(2000);
+        loadPageSleep();
         driver.findElement(By.name("Passwd")).sendKeys(password);
-        Thread.sleep(1000);
-        WebElement button = driver.findElement(By.xpath("//*[contains(text(), 'Next')]"));
-        button.click();
+        betweenElementSleep();
+        driver.findElement(By.xpath("//*[contains(text(), 'Next')]")).click();
     }
 }
