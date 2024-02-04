@@ -47,7 +47,7 @@ public class AbstractTests {
 
         // Other
         options.addArguments("disable-infobars");
-        options.addExtensions(new File("/Users/daffafaizan/Documents/Programming/Projects/openway-mail/src/test/java/extensions/Buster-Captcha-Solver-for-Humans.crx"));
+        options.addExtensions(new File(System.getProperty("user.dir") + "src/main/test/java/extensions/Buster-Captcha-Solver-for-Humans.crx"));
 
         return options;
     }
