@@ -14,7 +14,6 @@ import java.awt.event.InputEvent;
 import java.io.File;
 import java.time.Duration;
 import java.util.Collections;
-import java.util.Random;
 
 public class MailTest {
     WebDriver driver;
@@ -54,13 +53,6 @@ public class MailTest {
         options.addExtensions(new File("/Users/daffafaizan/Documents/Programming/Projects/openway-mail/src/test/java/mailbox/Buster-Captcha-Solver-for-Humans.crx"));
 
         return options;
-    }
-
-    // Support
-    public Point mouseLocation(int x, int y) {
-        int newX = driver.manage().window().getPosition().x + x;
-        int newY = driver.manage().window().getPosition().y + y;
-        return new Point(newX, newY);
     }
 
     @BeforeClass
