@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.awt.event.InputEvent;
 
-public class LoginTest extends AbstractTests {
+public class MailTest extends AbstractTests {
 
     // Tests
     @Test(priority = 1)
@@ -49,4 +49,10 @@ public class LoginTest extends AbstractTests {
         betweenElementSleep();
         driver.findElement(By.xpath("//*[contains(text(), 'Next')]")).click();
     }
-}
+
+    @Test(priority = 6)
+    public void searchUnreadMail() throws InterruptedException {
+        loadPageSleep();
+        driver.findElement(By.xpath("//input[contains(@placeholder, 'Search mail')]")).sendKeys("is:unread");
+        driver.findElement(By.xpath("//input[contains(@placeholder, 'Search mail')]")).sendKeys(Keys.RETURN);
+    }}

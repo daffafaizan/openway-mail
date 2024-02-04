@@ -3,7 +3,7 @@ package mailbox;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 import java.awt.*;
 import java.io.File;
@@ -11,12 +11,12 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Random;
 
-public abstract class AbstractTests {
-    WebDriver driver;
-    Robot robot;
-    String url;
-    String email;
-    String password;
+public class AbstractTests {
+    protected WebDriver driver;
+    protected Robot robot;
+    protected String url;
+    protected String email;
+    protected String password;
 
     // Constructor
     public AbstractTests() {
@@ -46,7 +46,7 @@ public abstract class AbstractTests {
 
         // Other
         options.addArguments("disable-infobars");
-        options.addExtensions(new File("/Users/daffafaizan/Documents/Programming/Projects/openway-mail/src/test/java/mailbox/Buster-Captcha-Solver-for-Humans.crx"));
+        options.addExtensions(new File("/Users/daffafaizan/Documents/Programming/Projects/openway-mail/src/test/java/extensions/Buster-Captcha-Solver-for-Humans.crx"));
 
         return options;
     }
@@ -59,17 +59,18 @@ public abstract class AbstractTests {
     }
 
     public void loadPageSleep() throws InterruptedException {
-        Thread.sleep(randomDuration(3000, 4000));
+        Thread.sleep(randomDuration(6000, 8000));
     }
 
     public void betweenElementSleep() throws InterruptedException {
         Thread.sleep(randomDuration(2000, 3000));
     }
 
-    @BeforeClass
+    @BeforeSuite
     public void initialize() throws AWTException {
         robot = new Robot();
         driver = new ChromeDriver(options());
         driver.get(url);
     }
+
 }
