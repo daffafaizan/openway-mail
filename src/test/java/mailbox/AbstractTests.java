@@ -17,6 +17,7 @@ public class AbstractTests {
     protected String url;
     protected String email;
     protected String password;
+    protected String title;
 
     // Constructor
     public AbstractTests() {

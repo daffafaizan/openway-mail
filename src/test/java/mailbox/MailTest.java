@@ -53,6 +53,15 @@ public class MailTest extends AbstractTests {
     @Test(priority = 6)
     public void searchUnreadMail() throws InterruptedException {
         loadPageSleep();
-        driver.findElement(By.xpath("//input[contains(@placeholder, 'Search mail')]")).sendKeys("is:unread");
-        driver.findElement(By.xpath("//input[contains(@placeholder, 'Search mail')]")).sendKeys(Keys.RETURN);
-    }}
+        driver.findElement(By.xpath("//input[@placeholder='Search mail']")).sendKeys("is:unread");
+        betweenElementSleep();
+        driver.findElement(By.xpath("//input[@placeholder='Search mail']")).sendKeys(Keys.RETURN);
+    }
+
+    @Test(priority = 7)
+    public void retrieveTitle() throws InterruptedException {
+        betweenElementSleep();
+        title = driver.findElement(By.xpath("//div[@class='y6']/span/span")).getAttribute("innerHTML");
+        System.out.println("Latest unread email is titled: " + title);
+    }
+}
