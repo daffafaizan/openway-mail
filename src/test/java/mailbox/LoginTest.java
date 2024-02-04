@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Random;
 
-public class MailTest {
+public class LoginTest {
     WebDriver driver;
     Robot robot;
     String url;
@@ -23,7 +23,7 @@ public class MailTest {
     String password;
 
     // Constructor
-    public MailTest() {
+    public LoginTest() {
         url = "https://mail.google.com/mail/";
         email = "avgautomationenjoyer@gmail.com";
         password = "automationenjoyer123";
