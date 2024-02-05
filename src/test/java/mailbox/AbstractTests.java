@@ -64,10 +64,6 @@ public class AbstractTests {
         Thread.sleep(randomDuration(2500, 3500));
     }
 
-    public void redirectPageSleep() throws InterruptedException {
-        Thread.sleep(randomDuration(6000, 8000));
-    }
-
     public void betweenElementSleep() throws InterruptedException {
         Thread.sleep(randomDuration(2000, 3000));
     }
