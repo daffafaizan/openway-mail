@@ -1,6 +1,7 @@
 package mailbox;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeSuite;
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.io.File;
 import java.time.Duration;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class AbstractTests {
@@ -17,7 +19,7 @@ public class AbstractTests {
     protected String url;
     protected String email;
     protected String password;
-    protected String title;
+    protected List<WebElement> titles;
     protected Boolean captcha;
 
     // Constructor

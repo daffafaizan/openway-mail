@@ -30,7 +30,8 @@ public class MailTest extends AbstractTests {
             captcha = true;
         } catch (TimeoutException e) {
             captcha = false;
-            throw new SkipException("No captcha detected");
+            System.out.print("\nNo captcha detected");
+            throw new SkipException("");
         }
 
     }
@@ -44,7 +45,8 @@ public class MailTest extends AbstractTests {
             robot.delay(25);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         } else {
-            throw new SkipException("No captcha detected");
+            System.out.print("\nNo captcha detected");
+            throw new SkipException("");
         }
     }
 
@@ -54,7 +56,8 @@ public class MailTest extends AbstractTests {
         if (captcha) {
             driver.findElement(By.xpath("//*[contains(text(), 'Next')]")).click();
         } else {
-            throw new SkipException("No captcha detected");
+            System.out.print("\nNo captcha detected");
+            throw new SkipException("");
         }
     }
 
@@ -77,7 +80,14 @@ public class MailTest extends AbstractTests {
     @Test(priority = 7)
     public void retrieveTitle() throws InterruptedException {
         betweenElementSleep();
-        title = driver.findElement(By.xpath("//div[@class='y6']/span/span")).getAttribute("innerHTML");
-        System.out.println("Latest unread email is titled: " + title);
+        try {
+            titles = driver.findElements(By.xpath("//div[@class='y6']/span/span"));
+            System.out.println("\n===============================================");
+            System.out.println("Latest unread email is titled: " + titles.getFirst().getAttribute("innerHTML"));
+            System.out.println("===============================================");
+        } catch (NoSuchElementException e) {
+            System.out.print("\nNo unread emails");
+            throw new SkipException("");
+        }
     }
 }
