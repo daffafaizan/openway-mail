@@ -18,6 +18,7 @@ public class AbstractTests {
     protected String email;
     protected String password;
     protected String title;
+    protected Boolean captcha;
 
     // Constructor
     public AbstractTests() {
