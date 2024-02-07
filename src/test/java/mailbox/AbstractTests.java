@@ -50,24 +50,10 @@ public class AbstractTests {
 
         // Other
         options.addArguments("disable-infobars");
+        options.addArguments("--incognito");
         options.addExtensions(new File(System.getProperty("user.dir") + "/src/test/java/extensions/Buster-Captcha-Solver-for-Humans.crx"));
 
         return options;
-    }
-
-    // Support
-    public Duration randomDuration(int start, int finish) {
-        Random random = new Random();
-        int duration = random.nextInt(start, finish);
-        return Duration.ofMillis(duration);
-    }
-
-    public void loadPageSleep() throws InterruptedException {
-        Thread.sleep(randomDuration(2500, 3500));
-    }
-
-    public void betweenElementSleep() throws InterruptedException {
-        Thread.sleep(randomDuration(2000, 3000));
     }
 
     @BeforeSuite
