@@ -1,25 +1,23 @@
-package mailbox;
+package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.List;
 
-public class AbstractTests {
+public class BaseTest {
     protected WebDriver driver;
     protected String url;
     protected String email;
     protected String password;
     protected String backupCode;
-    protected List<WebElement> titles;
 
     // Constructor
-    public AbstractTests() {
+    public BaseTest() {
+        this.driver = new ChromeDriver(options());
         this.url = "https://mail.google.com/mail/";
         this.email = "avgautomationenjoyer@gmail.com";
         this.password = "automationenjoyer123";
@@ -55,8 +53,6 @@ public class AbstractTests {
 
     @BeforeSuite
     public void initialize() {
-        this.driver = new ChromeDriver(options());
         driver.get(url);
     }
-
 }
