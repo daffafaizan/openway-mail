@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class SignInPages {
+public class MailSignInPages {
 
     WebDriver driver;
     WebDriverWait wait;
@@ -31,7 +31,7 @@ public class SignInPages {
     @FindBy(xpath = "//*[contains(text(), 'Enter one of your 8-digit backup codes')]")
     WebElement selectBackupCodeButton;
 
-    public SignInPages(WebDriver driver) {
+    public MailSignInPages(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, Duration.ofMillis(10000));
         PageFactory.initElements(driver, this);

@@ -3,8 +3,7 @@
 <suite name="openway-mail">
     <test name="Unread mail title getter">
         <classes>
-            <class name="tests.SignInTests" />
-            <class name="tests.InboxTests" />
+            <class name="tests.MailTests" />
         </classes>
     </test>
 </suite>

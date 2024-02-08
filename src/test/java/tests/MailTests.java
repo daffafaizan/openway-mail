@@ -1,29 +1,31 @@
-package mailbox;
+package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+import pages.MailInboxPages;
+import pages.MailSignInPages;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.List;
 
-public class AbstractTests {
+public class MailTests {
     protected WebDriver driver;
+    protected MailSignInPages signInPages;
+    protected MailInboxPages inboxPages;
     protected String url;
     protected String email;
     protected String password;
     protected String backupCode;
-    protected List<WebElement> titles;
 
     // Constructor
-    public AbstractTests() {
+    public MailTests() {
         this.url = "https://mail.google.com/mail/";
         this.email = "avgautomationenjoyer@gmail.com";
         this.password = "automationenjoyer123";
-        this.backupCode = "29230737";
+        this.backupCode = "40886018";
     }
 
     // Config
@@ -56,7 +58,51 @@ public class AbstractTests {
     @BeforeSuite
     public void initialize() {
         this.driver = new ChromeDriver(options());
+        this.signInPages = new MailSignInPages(driver);
+        this.inboxPages = new MailInboxPages(driver);
         driver.get(url);
     }
 
+    @Test(priority = 1)
+    public void enterEmailTest() {
+        signInPages.enterEmail(email);
+        signInPages.clickNext();
+    }
+
+    @Test(priority = 2)
+    public void enterPasswordTest() {
+        signInPages.enterPassword(password);
+        signInPages.clickNext();
+    }
+
+    @Test(priority = 3)
+    public void clickTryAnotherWayTest() {
+        signInPages.clickTryAnotherWay();
+    }
+
+    @Test(priority = 4)
+    public void clickSelectInputBackupCodeTest() {
+        signInPages.clickSelectBackupCode();
+    }
+
+    @Test(priority = 5)
+    public void enterBackupCodeTest() {
+        signInPages.enterBackupCode(backupCode);
+        signInPages.clickNext();
+    }
+
+    @Test(priority = 6)
+    public void enterQueryTest() {
+        inboxPages.enterQuery("is:unread");
+    }
+
+    @Test(priority = 7)
+    public void returnEnterQueryTest() {
+        inboxPages.returnEnterQuery();
+    }
+
+    @Test(priority = 8)
+    public void retrieveLatestUnreadTitleTest() {
+        inboxPages.retrieveLatestUnreadTitle();
+    }
 }
