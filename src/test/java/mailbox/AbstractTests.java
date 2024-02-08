@@ -15,18 +15,18 @@ import java.util.Random;
 
 public class AbstractTests {
     protected WebDriver driver;
-    protected Robot robot;
     protected String url;
     protected String email;
     protected String password;
+    protected String backupCode;
     protected List<WebElement> titles;
-    protected Boolean captcha;
 
     // Constructor
     public AbstractTests() {
         url = "https://mail.google.com/mail/";
         email = "avgautomationenjoyer@gmail.com";
         password = "automationenjoyer123";
+        backupCode = "60398298";
     }
 
     // Config
@@ -58,7 +58,6 @@ public class AbstractTests {
 
     @BeforeSuite
     public void initialize() throws AWTException {
-        robot = new Robot();
         driver = new ChromeDriver(options());
         driver.get(url);
     }
