@@ -12,23 +12,53 @@ public class MailTests extends MailTestsSetup {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 2)
-    public void TC001_VerifyEmailInputDisplayed() {
+    public void TC002_VerifyEmailInputDisplayed() {
         boolean isDisplayed = signInPages.emailInputIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 3)
-    public void TC001_VerifyNextButtonDisplayed() {
+    public void TC003_VerifyEmailInputClickable() {
+        boolean isClickable = signInPages.emailInputIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 4)
+    public void TC004_VerifyNextButtonDisplayed() {
         boolean isDisplayed = signInPages.nextButtonIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 4)
-    public void TC001_VerifyEmptyEmailInputError() {
+    @Test(priority = 5)
+    public void TC005_VerifyNextButtonClickable() {
+        boolean isClickable = signInPages.nextButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 6)
+    public void TC006_VerifyForgotEmailButtonDisplayed() {
+        boolean isDisplayed = signInPages.forgotEmailButtonIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 7)
+    public void TC007_VerifyForgotEmailButtonClickable() {
+        boolean isClickable = signInPages.forgotEmailButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 8)
+    public void TC008_VerifyCreateAccountButtonDisplayed() {
+        boolean isDisplayed = signInPages.createAccountButtonIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 9)
+    public void TC009_VerifyCreateAccountButtonClickable() {
+        boolean isClickable = signInPages.createAccountButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 10)
+    public void TC010_VerifyEmptyEmailInputError() {
         signInPages.clickNext();
         boolean isDisplayed = signInPages.emailInputErrorIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 5)
-    public void TC001_InputValidEmail() {
+    @Test(priority = 11)
+    public void TC011_InputValidEmail() {
         String currentURL = signInPages.getURL();
         signInPages.enterEmail(email);
         signInPages.clickNext();
@@ -37,24 +67,50 @@ public class MailTests extends MailTestsSetup {
         boolean isValid = currentURL.equals(nextURL);
         Assert.assertFalse(isValid);
     }
-    @Test(priority = 6)
-    public void TC002_VerifyValidTitle() {
+    @Test(priority = 12)
+    public void TC012_VerifyValidTitle() {
         String expectedTitle = "Welcome";
         String actualTitle = signInPages.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-    @Test(priority = 7)
-    public void TC002_VerifyPasswordInputDisplayed() {
+    @Test(priority = 13)
+    public void TC013_VerifyPasswordInputDisplayed() {
         boolean isDisplayed = signInPages.passwordInputIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 8)
-    public void TC002_VerifyNextButtonDisplayed() {
+    @Test(priority = 14)
+    public void TC014_VerifyPasswordInputClickable() {
+        boolean isClickable = signInPages.passwordInputIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 15)
+    public void TC015_VerifyNextButtonDisplayed() {
         boolean isDisplayed = signInPages.nextButtonIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 9)
-    public void TC002_InputPassword() {
+    @Test(priority = 16)
+    public void TC016_VerifyNextButtonClickable() {
+        boolean isClickable = signInPages.nextButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 17)
+    public void TC017_VerifyForgotPasswordButtonDisplayed() {
+        boolean isDisplayed = signInPages.forgotPasswordButtonIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 18)
+    public void TC018_VerifyForgotPasswordButtonClickable() {
+        boolean isClickable = signInPages.forgotPasswordButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 19)
+    public void TC019_VerifyEmptyPasswordInputError() {
+        signInPages.clickNext();
+        boolean isDisplayed = signInPages.passwordInputErrorIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 20)
+    public void TC020_InputPassword() {
         String currentURL = signInPages.getURL();
         signInPages.enterPassword(password);
         signInPages.clickNext();
@@ -63,19 +119,39 @@ public class MailTests extends MailTestsSetup {
         boolean isValid = currentURL.equals(nextURL);
         Assert.assertFalse(isValid);
     }
-    @Test(priority = 10)
-    public void TC003_VerifyValidTitle() {
+    @Test(priority = 21)
+    public void TC021_VerifyValidTitle() {
         String expectedTitle = "2-Step Verification";
         String actualTitle = signInPages.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-    @Test(priority = 11)
-    public void TC003_VerifyTryAnotherWayDisplayed() {
-        boolean isDisplayed = signInPages.tryAnotherWayIsPresent();
+    @Test(priority = 22)
+    public void TC022_VerifyTooManyFailedAttemptsTitleDisplayed() {
+        boolean isDisplayed = signInPages.tooManyFailedAttemptsTitleIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 12)
-    public void TC003_ClickTryAnotherWay() {
+    @Test(priority = 23)
+    public void TC023_VerifyResendItButtonDisplayed() {
+        boolean isDisplayed = signInPages.resendItButtonIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 24)
+    public void TC024_VerifyResendItButtonClickable() {
+        boolean isClickable = signInPages.resendItButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 25, dependsOnMethods = {"TC023_VerifyResendItButtonDisplayed"})
+    public void TC025_VerifyTryAnotherWayDisplayed() {
+        boolean isDisplayed = signInPages.tryAnotherWayButtonIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 26, dependsOnMethods = {"TC023_VerifyResendItButtonDisplayed"})
+    public void TC026_VerifyTryAnotherWayClickable() {
+        boolean isClickable = signInPages.tryAnotherWayButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 27, dependsOnMethods = {"TC023_VerifyResendItButtonDisplayed", "TC025_VerifyTryAnotherWayDisplayed"})
+    public void TC027_ClickTryAnotherWay() {
         String currentURL = signInPages.getURL();
         signInPages.clickTryAnotherWay();
         String nextURL = signInPages.getURL();
@@ -83,33 +159,48 @@ public class MailTests extends MailTestsSetup {
         boolean isValid = currentURL.equals(nextURL);
         Assert.assertFalse(isValid);
     }
-    @Test(priority = 13)
-    public void TC004_VerifySelectBackupCodeDisplayed() {
+    @Test(priority = 28)
+    public void TC028_VerifySelectBackupCodeDisplayed() {
         boolean isDisplayed = signInPages.selectBackupCodeIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 14)
-    public void TC004_ClickSelectBackupCode() {
+    @Test(priority = 29)
+    public void TC029_VerifySelectBackupCodeClickable() {
+        boolean isClickable = signInPages.selectBackupCodeIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 30)
+    public void TC030_ClickSelectBackupCode() {
         signInPages.clickSelectBackupCode();
     }
-    @Test(priority = 15)
-    public void TC005_VerifyInputBackupCodeDisplayed() {
+    @Test(priority = 31)
+    public void TC031_VerifyInputBackupCodeDisplayed() {
         boolean isDisplayed = signInPages.backupCodeInputIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 16)
-    public void TC005_VerifyNextButtonDisplayed() {
+    @Test(priority = 32)
+    public void TC032_VerifyInputBackupCodeClickable() {
+        boolean isClickable = signInPages.backupCodeInputIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 33)
+    public void TC033_VerifyNextButtonDisplayed() {
         boolean isDisplayed = signInPages.nextButtonIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 17)
-    public void TC005_VerifyEmptyBackupCodeInputError() {
+    @Test(priority = 34)
+    public void TC034_VerifyNextButtonClickable() {
+        boolean isClickable = signInPages.nextButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 35)
+    public void TC035_VerifyEmptyBackupCodeInputError() {
         signInPages.clickNext();
         boolean isDisplayed = signInPages.backupCodeInputErrorIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 18)
-    public void TC005_InputBackupCode() {
+    @Test(priority = 36)
+    public void TC036_InputBackupCode() {
         String currentURL = signInPages.getURL();
         signInPages.enterBackupCode(backupCode);
         signInPages.clickNext();
@@ -118,17 +209,22 @@ public class MailTests extends MailTestsSetup {
         boolean isValid = currentURL.equals(nextURL);
         Assert.assertFalse(isValid);
     }
-    @Test(priority = 19)
-    public void TC006_VerifySearchBarDisplayed() {
+    @Test(priority = 37)
+    public void TC037_VerifySearchBarDisplayed() {
         boolean isDisplayed = inboxPages.searchBarIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 20)
-    public void TC006_SearchUnreadEmail() {
+    @Test(priority = 38)
+    public void TC038_VerifySearchBarClickable() {
+        boolean isClickable = inboxPages.searchBarIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 39)
+    public void TC039_SearchUnreadEmail() {
         inboxPages.enterQuery("is:unread");
     }
-    @Test(priority = 21)
-    public void TC006_RetrieveLatestUnreadEmailTitle() {
+    @Test(priority = 40)
+    public void TC040_RetrieveLatestUnreadEmailTitle() {
         inboxPages.getLatestUnreadTitle();
     }
 }

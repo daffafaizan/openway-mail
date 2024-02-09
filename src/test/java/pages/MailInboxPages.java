@@ -47,6 +47,11 @@ public class MailInboxPages {
 
     // Checking if element is present
     public boolean searchBarIsPresent() {
-        return searchBar.isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOf(searchBar)).isDisplayed();
+    }
+
+    // Checking if element is clickable
+    public boolean searchBarIsClickable() {
+        return wait.until(ExpectedConditions.elementToBeClickable(searchBar)).isDisplayed();
     }
 }

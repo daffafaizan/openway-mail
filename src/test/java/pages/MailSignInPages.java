@@ -24,6 +24,12 @@ public class MailSignInPages {
     WebElement backupCodeInput;
 
     // Button Elements
+    @FindBy(xpath = "//button[text()='Forgot email?']")
+    WebElement forgotEmailButton;
+    @FindBys({@FindBy(xpath = "//span[text()='Forgot password?']"), @FindBy(xpath = "./ancestor::button")})
+    WebElement forgotPasswordButton;
+    @FindBys({@FindBy(xpath = "//span[text()='Create account']"), @FindBy(xpath = "./ancestor::button")})
+    WebElement createAccountButton;
     @FindBy(xpath = "//*[contains(text(), 'Next')]")
     WebElement nextButton;
     @FindBys({@FindBy(xpath = "//span[text()='Try another way']"), @FindBy(xpath = "./ancestor::button")})
@@ -36,8 +42,12 @@ public class MailSignInPages {
     // Text Elements
     @FindBy(xpath = "//h1[@id='headingText']/span")
     WebElement title;
+    @FindBy(xpath = "//span[text()='Too many failed attempts']")
+    WebElement tooManyFailedAttemptsTitle;
     @FindBy(xpath = "//div[text()='Enter an email or phone number']")
     WebElement emailInputError;
+    @FindBy(xpath = "//span[text()='Enter a password']")
+    WebElement passwordInputError;
     @FindBy(xpath = "//div[text()='Enter a code']")
     WebElement backupCodeInputError;
 
@@ -66,7 +76,6 @@ public class MailSignInPages {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
     public void clickTryAnotherWay() {
-        wait.until(ExpectedConditions.elementToBeClickable(resendItButton));
         waitClick(tryAnotherWayButton);
     }
     public void clickSelectBackupCode() {
@@ -89,6 +98,18 @@ public class MailSignInPages {
     public boolean isPresent(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
+    public boolean tooManyFailedAttemptsTitleIsPresent() {
+        return isPresent(tooManyFailedAttemptsTitle);
+    }
+    public boolean forgotEmailButtonIsPresent() {
+        return isPresent(forgotEmailButton);
+    }
+    public boolean forgotPasswordButtonIsPresent() {
+        return isPresent(forgotPasswordButton);
+    }
+    public boolean createAccountButtonIsPresent() {
+        return isPresent(createAccountButton);
+    }
     public boolean nextButtonIsPresent() {
         return isPresent(nextButton);
     }
@@ -98,7 +119,10 @@ public class MailSignInPages {
     public boolean passwordInputIsPresent() {
         return isPresent(passwordInput);
     }
-    public boolean tryAnotherWayIsPresent() {
+    public boolean resendItButtonIsPresent() {
+        return isPresent(resendItButton);
+    }
+    public boolean tryAnotherWayButtonIsPresent() {
         return isPresent(tryAnotherWayButton);
     }
     public boolean selectBackupCodeIsPresent() {
@@ -110,8 +134,45 @@ public class MailSignInPages {
     public boolean emailInputErrorIsPresent() {
         return isPresent(emailInputError);
     }
+    public boolean passwordInputErrorIsPresent() {
+        return isPresent(passwordInputError);
+    }
     public boolean backupCodeInputErrorIsPresent() {
         return isPresent(backupCodeInputError);
     }
 
+    // Checking if element is clickable
+    public boolean isClickable(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element)).isDisplayed();
+    }
+    public boolean forgotEmailButtonIsClickable() {
+        return isClickable(forgotEmailButton);
+    }
+    public boolean forgotPasswordButtonIsClickable() {
+        return isClickable(forgotPasswordButton);
+    }
+    public boolean createAccountButtonIsClickable() {
+        return isClickable(createAccountButton);
+    }
+    public boolean nextButtonIsClickable() {
+        return isClickable(nextButton);
+    }
+    public boolean emailInputIsClickable() {
+        return isClickable(emailInput);
+    }
+    public boolean passwordInputIsClickable() {
+        return isClickable(passwordInput);
+    }
+    public boolean resendItButtonIsClickable() {
+        return isClickable(resendItButton);
+    }
+    public boolean tryAnotherWayButtonIsClickable() {
+        return isClickable(tryAnotherWayButton);
+    }
+    public boolean selectBackupCodeIsClickable() {
+        return isClickable(selectBackupCodeButton);
+    }
+    public boolean backupCodeInputIsClickable() {
+        return isClickable(backupCodeInput);
+    }
 }
