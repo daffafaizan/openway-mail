@@ -40,10 +40,16 @@ public class MailSignInPages {
     WebElement selectBackupCodeButton;
 
     // Text Elements
-    @FindBy(xpath = "//h1[@id='headingText']/span")
-    WebElement title;
+    @FindBy(xpath = "//h1[@id='headingText']/span[text()='Sign in']")
+    WebElement signInTitle;
+    @FindBy(xpath = "//h1[@id='headingText']/span[text()='Welcome']")
+    WebElement welcomeTitle;
+    @FindBy(xpath = "//h1[@id='headingText']/span[text()='2-Step Verification']")
+    WebElement twoFactorAuthenticationTitle;
     @FindBy(xpath = "//span[text()='Too many failed attempts']")
     WebElement tooManyFailedAttemptsTitle;
+    @FindBy(xpath = "//span[text()='Choose how you want to sign in:']")
+    WebElement chooseSignInMethodText;
     @FindBy(xpath = "//div[text()='Enter an email or phone number']")
     WebElement emailInputError;
     @FindBy(xpath = "//span[text()='Enter a password']")
@@ -86,9 +92,20 @@ public class MailSignInPages {
     }
 
     // Grabbing text
-    public String getTitle() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
-        return title.getText();
+    public String textVisible(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).getText();
+    }
+    public String getSignInTitle() {
+        return textVisible(signInTitle);
+    }
+    public String getWelcomeTitle() {
+        return textVisible(welcomeTitle);
+    }
+    public String get2FATitle() {
+        return textVisible(twoFactorAuthenticationTitle);
+    }
+    public String getChooseSignInMethodText() {
+        return textVisible(chooseSignInMethodText);
     }
     public String getURL() {
         return driver.getCurrentUrl();

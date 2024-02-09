@@ -8,7 +8,7 @@ public class MailTests extends MailTestsSetup {
     @Test(priority = 1)
     public void TC001_VerifyValidTitle() {
         String expectedTitle = "Sign in";
-        String actualTitle = signInPages.getTitle();
+        String actualTitle = signInPages.getSignInTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 2)
@@ -59,18 +59,17 @@ public class MailTests extends MailTestsSetup {
     }
     @Test(priority = 11)
     public void TC011_InputValidEmail() {
-        String currentURL = signInPages.getURL();
         signInPages.enterEmail(email);
         signInPages.clickNext();
-        String nextURL = signInPages.getURL();
 
-        boolean isValid = currentURL.equals(nextURL);
-        Assert.assertFalse(isValid);
+        String expectedTitle = "Welcome";
+        String actualTitle = signInPages.getWelcomeTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 12)
     public void TC012_VerifyValidTitle() {
         String expectedTitle = "Welcome";
-        String actualTitle = signInPages.getTitle();
+        String actualTitle = signInPages.getWelcomeTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 13)
@@ -111,18 +110,17 @@ public class MailTests extends MailTestsSetup {
     }
     @Test(priority = 20)
     public void TC020_InputPassword() {
-        String currentURL = signInPages.getURL();
         signInPages.enterPassword(password);
         signInPages.clickNext();
-        String nextURL = signInPages.getURL();
 
-        boolean isValid = currentURL.equals(nextURL);
-        Assert.assertFalse(isValid);
+        String expectedTitle = "2-Step Verification";
+        String actualTitle = signInPages.get2FATitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 21)
     public void TC021_VerifyValidTitle() {
         String expectedTitle = "2-Step Verification";
-        String actualTitle = signInPages.getTitle();
+        String actualTitle = signInPages.get2FATitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 22)
@@ -152,12 +150,11 @@ public class MailTests extends MailTestsSetup {
     }
     @Test(priority = 27, dependsOnMethods = {"TC023_VerifyResendItButtonDisplayed", "TC025_VerifyTryAnotherWayDisplayed"})
     public void TC027_ClickTryAnotherWay() {
-        String currentURL = signInPages.getURL();
         signInPages.clickTryAnotherWay();
-        String nextURL = signInPages.getURL();
 
-        boolean isValid = currentURL.equals(nextURL);
-        Assert.assertFalse(isValid);
+        String expectedTitle = "Choose how you want to sign in:";
+        String actualTitle = signInPages.getChooseSignInMethodText();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 28)
     public void TC028_VerifySelectBackupCodeDisplayed() {
