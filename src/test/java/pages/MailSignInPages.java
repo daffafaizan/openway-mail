@@ -36,6 +36,8 @@ public class MailSignInPages {
     WebElement title;
     @FindBy(xpath = "//span[text()='Enter an email or phone number']")
     WebElement emailInputError;
+    @FindBy(xpath = "//span[text()='Enter a code']")
+    WebElement backupCodeInputError;
 
     public MailSignInPages(WebDriver driver) {
         this.driver = driver;
@@ -73,21 +75,37 @@ public class MailSignInPages {
 
     // Grabbing text
     public String getTitle() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
         return title.getText();
     }
 
     // Checking if element is present
+    public Boolean isPresent(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+    }
     public Boolean nextButtonIsPresent() {
-        return nextButton.isDisplayed();
+        return isPresent(nextButton);
     }
     public Boolean emailInputIsPresent() {
-        return emailInput.isDisplayed();
+        return isPresent(emailInput);
     }
     public Boolean passwordInputIsPresent() {
-        return passwordInput.isDisplayed();
+        return isPresent(passwordInput);
+    }
+    public Boolean tryAnotherWayIsPresent() {
+        return isPresent(tryAnotherWayButton);
+    }
+    public Boolean selectBackupCodeIsPresent() {
+        return isPresent(selectBackupCodeButton);
+    }
+    public Boolean backupCodeInputIsPresent() {
+        return isPresent(backupCodeInput);
     }
     public Boolean emailInputErrorIsPresent() {
-        return emailInputError.isDisplayed();
+        return isPresent(emailInputError);
+    }
+    public Boolean backupCodeInputErrorIsPresent() {
+        return isPresent(backupCodeInputError);
     }
 
 }

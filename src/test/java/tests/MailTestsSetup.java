@@ -23,7 +23,7 @@ public class MailTestsSetup {
         this.url = "https://mail.google.com/mail/";
         this.email = "avgautomationenjoyer@gmail.com";
         this.password = "automationenjoyer123";
-        this.backupCode = "20634357";
+        this.backupCode = "37381908";
     }
 
     // Config

@@ -30,17 +30,23 @@ public class MailInboxPages {
         PageFactory.initElements(driver, this);
     }
 
+    // Entering input
     public void enterQuery(String query) {
         wait.until(ExpectedConditions.elementToBeClickable(searchBar)).sendKeys(query, Keys.RETURN);
     }
 
+    // Grabbing text
     public void getLatestUnreadTitle() {
         System.out.println("\n===============================================");
         System.out.println("Latest unread email is titled: " + titles.getFirst().getAttribute("innerHTML"));
         System.out.println("===============================================");
     }
-
     public String getUrl() {
         return driver.getCurrentUrl();
+    }
+
+    // Checking if element is present
+    public Boolean searchBarIsPresent() {
+        return searchBar.isDisplayed();
     }
 }
