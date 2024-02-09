@@ -31,6 +31,10 @@ public class MailSignInPages {
     @FindBy(xpath = "//*[contains(text(), 'Enter one of your 8-digit backup codes')]")
     WebElement selectBackupCodeButton;
 
+    // Text Elements
+    @FindBy(xpath = "//h1[@id='headingText']/span")
+    WebElement title;
+
     public MailSignInPages(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, Duration.ofMillis(10000));
@@ -61,5 +65,9 @@ public class MailSignInPages {
     }
     public void clickNext() {
         waitClick(nextButton);
+    }
+
+    public String getTitle() {
+        return title.getText();
     }
 }

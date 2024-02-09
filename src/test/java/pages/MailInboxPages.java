@@ -30,22 +30,17 @@ public class MailInboxPages {
         PageFactory.initElements(driver, this);
     }
 
-    public void waitElements(WebElement element, String query) {
-        wait.until(ExpectedConditions.elementToBeClickable(element)).sendKeys(query);
-    }
-    public void waitElements(WebElement element, Keys keys) {
-        wait.until(ExpectedConditions.elementToBeClickable(element)).sendKeys(keys);
+    public void enterQuery(String query) {
+        wait.until(ExpectedConditions.elementToBeClickable(searchBar)).sendKeys(query, Keys.RETURN);
     }
 
-    public void enterQuery(String query) {
-        waitElements(searchBar, query);
-    }
-    public void returnEnterQuery() {
-        waitElements(searchBar, Keys.RETURN);
-    }
     public void retrieveLatestUnreadTitle() {
         System.out.println("\n===============================================");
         System.out.println("Latest unread email is titled: " + titles.getFirst().getAttribute("innerHTML"));
         System.out.println("===============================================");
+    }
+
+    public String getUrl() {
+        return driver.getCurrentUrl();
     }
 }

@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.MailInboxPages;
@@ -25,7 +26,7 @@ public class MailTests {
         this.url = "https://mail.google.com/mail/";
         this.email = "avgautomationenjoyer@gmail.com";
         this.password = "automationenjoyer123";
-        this.backupCode = "40886018";
+        this.backupCode = "20634357";
     }
 
     // Config
@@ -50,7 +51,6 @@ public class MailTests {
         // Other
         options.addArguments("disable-infobars");
         options.addArguments("--incognito");
-        options.addExtensions(new File(System.getProperty("user.dir") + "/src/test/java/extensions/Buster-Captcha-Solver-for-Humans.crx"));
 
         return options;
     }
@@ -63,46 +63,48 @@ public class MailTests {
         driver.get(url);
     }
 
-    @Test(priority = 1)
-    public void enterEmailTest() {
+    @Test
+    public void TC001_VerifyTitle() {
+        String expectedTitle = "Sign in";
+        String actualTitle = signInPages.getTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+
+    @Test
+    public void TC002_InputEmail() {
         signInPages.enterEmail(email);
         signInPages.clickNext();
+
+        String expectedTitle = "Welcome";
+        String actualTitle = signInPages.getTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
 
-    @Test(priority = 2)
-    public void enterPasswordTest() {
+    @Test
+    public void TC003_InputPassword() {
         signInPages.enterPassword(password);
         signInPages.clickNext();
+
+        String expectedTitle = "2-Step Verification";
+        String actualTitle = signInPages.getTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
 
-    @Test(priority = 3)
-    public void clickTryAnotherWayTest() {
+    @Test
+    public void TC004_2FA() {
         signInPages.clickTryAnotherWay();
-    }
-
-    @Test(priority = 4)
-    public void clickSelectInputBackupCodeTest() {
         signInPages.clickSelectBackupCode();
-    }
-
-    @Test(priority = 5)
-    public void enterBackupCodeTest() {
         signInPages.enterBackupCode(backupCode);
         signInPages.clickNext();
+
+        String expectedUrl = "https://mail.google.com/mail/u/0/#inbox";
+        String actualUrl = inboxPages.getUrl();
+        Assert.assertEquals(actualUrl, expectedUrl);
     }
 
-    @Test(priority = 6)
-    public void enterQueryTest() {
+    @Test
+    public void TC005_RetrieveTitle() {
         inboxPages.enterQuery("is:unread");
-    }
-
-    @Test(priority = 7)
-    public void returnEnterQueryTest() {
-        inboxPages.returnEnterQuery();
-    }
-
-    @Test(priority = 8)
-    public void retrieveLatestUnreadTitleTest() {
         inboxPages.retrieveLatestUnreadTitle();
     }
 }
