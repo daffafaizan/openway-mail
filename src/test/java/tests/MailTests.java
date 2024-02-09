@@ -114,6 +114,10 @@ public class MailTests extends MailTestsSetup {
     public void TC020_InputPassword() {
         signInPages.enterPassword(password);
         signInPages.clickNext();
+
+        String expectedTitle = "2-Step Verification";
+        String actualTitle = signInPages.get2FATitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 21)
     public void TC021_VerifyValidTitle() {
@@ -125,13 +129,10 @@ public class MailTests extends MailTestsSetup {
     public void TC022_VerifyTooManyFailedAttemptsTitleDisplayed() throws TimeoutException {
         try {
             tooManyFailedAttempts = signInPages.tooManyFailedAttemptsTitleIsPresent();
+            Assert.assertTrue(true);
         } catch (TimeoutException exception) {
             tooManyFailedAttempts = false;
-            if (!tooManyFailedAttempts) {
-                Assert.assertFalse(false);
-            } else {
-                Assert.assertTrue(true);
-            }
+            Assert.assertFalse(false);
         }
     }
     @Test(priority = 23)
@@ -167,6 +168,10 @@ public class MailTests extends MailTestsSetup {
     @Test(priority = 27, dependsOnMethods = {"TC023_VerifyResendItButtonDisplayed", "TC025_VerifyTryAnotherWayDisplayed"})
     public void TC027_ClickTryAnotherWay() {
         signInPages.clickTryAnotherWay();
+
+        String expectedTitle = "Choose how you want to sign in:";
+        String actualTitle = signInPages.getChooseSignInMethodText();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 28)
     public void TC028_VerifySelectBackupCodeDisplayed() {
@@ -181,6 +186,10 @@ public class MailTests extends MailTestsSetup {
     @Test(priority = 30)
     public void TC030_ClickSelectBackupCode() {
         signInPages.clickSelectBackupCode();
+
+        String expectedTitle = "Enter one of your 8-digit backup codes";
+        String actualTitle = signInPages.getEnterBackupCodeText();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 31)
     public void TC031_VerifyInputBackupCodeDisplayed() {
@@ -209,26 +218,40 @@ public class MailTests extends MailTestsSetup {
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 36)
-    public void TC036_InputBackupCode() {
-        signInPages.enterBackupCode(backupCode);
-        signInPages.clickNext();
+    public void TC036_VerifyTryAnotherWayDisplayed() {
+        boolean isDisplayed = signInPages.tryAnotherWayButtonIsPresent();
+        Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 37)
-    public void TC037_VerifySearchBarDisplayed() {
+    public void TC037_VerifyTryAnotherWayClickable() {
+        boolean isClickable = signInPages.tryAnotherWayButtonIsClickable();
+        Assert.assertTrue(isClickable);
+    }
+    @Test(priority = 38)
+    public void TC038_InputBackupCode() {
+        signInPages.enterBackupCode(backupCode);
+        signInPages.clickNext();
+
+        String expectedURL = "https://mail.google.com/mail/u/0/#inbox";
+        String actualURL = inboxPages.getURL();
+        Assert.assertEquals(actualURL, expectedURL);
+    }
+    @Test(priority = 39)
+    public void TC039_VerifySearchBarDisplayed() {
         boolean isDisplayed = inboxPages.searchBarIsPresent();
         Assert.assertTrue(isDisplayed);
     }
-    @Test(priority = 38)
-    public void TC038_VerifySearchBarClickable() {
+    @Test(priority = 40)
+    public void TC040_VerifySearchBarClickable() {
         boolean isClickable = inboxPages.searchBarIsClickable();
         Assert.assertTrue(isClickable);
     }
-    @Test(priority = 39)
-    public void TC039_SearchUnreadEmail() {
+    @Test(priority = 41)
+    public void TC041_SearchUnreadEmail() {
         inboxPages.enterQuery("is:unread");
     }
-    @Test(priority = 40)
-    public void TC040_RetrieveLatestUnreadEmailTitle() {
+    @Test(priority = 42)
+    public void TC042_RetrieveLatestUnreadEmailTitle() {
         inboxPages.getLatestUnreadTitle();
     }
 }

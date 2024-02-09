@@ -41,17 +41,24 @@ public class MailInboxPages {
         System.out.println("Latest unread email is titled: " + titles.getFirst().getAttribute("innerHTML"));
         System.out.println("===============================================");
     }
-    public String getUrl() {
+    public String getURL() {
+        wait.until(ExpectedConditions.visibilityOf(searchBar)).isDisplayed();
         return driver.getCurrentUrl();
     }
 
     // Checking if element is present
+    public boolean isPresent(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+    }
     public boolean searchBarIsPresent() {
-        return wait.until(ExpectedConditions.visibilityOf(searchBar)).isDisplayed();
+        return isPresent(searchBar);
     }
 
     // Checking if element is clickable
+    public boolean isClickable(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element)).isDisplayed();
+    }
     public boolean searchBarIsClickable() {
-        return wait.until(ExpectedConditions.elementToBeClickable(searchBar)).isDisplayed();
+        return isClickable(searchBar);
     }
 }

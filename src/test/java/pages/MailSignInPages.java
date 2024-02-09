@@ -50,6 +50,8 @@ public class MailSignInPages {
     WebElement tooManyFailedAttemptsTitle;
     @FindBy(xpath = "//span[text()='Choose how you want to sign in:']")
     WebElement chooseSignInMethodText;
+    @FindBy(xpath = "//div[text()='Enter one of your 8-digit backup codes']")
+    WebElement enterBackupCodeText;
     @FindBy(xpath = "//div[text()='Enter an email or phone number']")
     WebElement emailInputError;
     @FindBy(xpath = "//span[text()='Enter a password']")
@@ -106,6 +108,9 @@ public class MailSignInPages {
     }
     public String getChooseSignInMethodText() {
         return textVisible(chooseSignInMethodText);
+    }
+    public String getEnterBackupCodeText() {
+        return textVisible(enterBackupCodeText);
     }
 
     // Checking if element is present
