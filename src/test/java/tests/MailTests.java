@@ -13,24 +13,29 @@ public class MailTests extends MailTestsSetup {
     }
     @Test(priority = 2)
     public void TC001_VerifyEmailInputDisplayed() {
-        Boolean isDisplayed = signInPages.emailInputIsPresent();
+        boolean isDisplayed = signInPages.emailInputIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 3)
     public void TC001_VerifyNextButtonDisplayed() {
-        Boolean isDisplayed = signInPages.nextButtonIsPresent();
+        boolean isDisplayed = signInPages.nextButtonIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 4)
     public void TC001_VerifyEmptyEmailInputError() {
         signInPages.clickNext();
-        Boolean isDisplayed = signInPages.emailInputErrorIsPresent();
+        boolean isDisplayed = signInPages.emailInputErrorIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 5)
     public void TC001_InputValidEmail() {
+        String currentURL = signInPages.getURL();
         signInPages.enterEmail(email);
         signInPages.clickNext();
+        String nextURL = signInPages.getURL();
+
+        boolean isValid = currentURL.equals(nextURL);
+        Assert.assertFalse(isValid);
     }
     @Test(priority = 6)
     public void TC002_VerifyValidTitle() {
@@ -39,19 +44,24 @@ public class MailTests extends MailTestsSetup {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test(priority = 7)
-    public void TC001_VerifyPasswordInputDisplayed() {
-        Boolean isDisplayed = signInPages.passwordInputIsPresent();
+    public void TC002_VerifyPasswordInputDisplayed() {
+        boolean isDisplayed = signInPages.passwordInputIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 8)
     public void TC002_VerifyNextButtonDisplayed() {
-        Boolean isDisplayed = signInPages.nextButtonIsPresent();
+        boolean isDisplayed = signInPages.nextButtonIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 9)
     public void TC002_InputPassword() {
+        String currentURL = signInPages.getURL();
         signInPages.enterPassword(password);
         signInPages.clickNext();
+        String nextURL = signInPages.getURL();
+
+        boolean isValid = currentURL.equals(nextURL);
+        Assert.assertFalse(isValid);
     }
     @Test(priority = 10)
     public void TC003_VerifyValidTitle() {
@@ -61,16 +71,21 @@ public class MailTests extends MailTestsSetup {
     }
     @Test(priority = 11)
     public void TC003_VerifyTryAnotherWayDisplayed() {
-        Boolean isDisplayed = signInPages.tryAnotherWayIsPresent();
+        boolean isDisplayed = signInPages.tryAnotherWayIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 12)
     public void TC003_ClickTryAnotherWay() {
+        String currentURL = signInPages.getURL();
         signInPages.clickTryAnotherWay();
+        String nextURL = signInPages.getURL();
+
+        boolean isValid = currentURL.equals(nextURL);
+        Assert.assertFalse(isValid);
     }
     @Test(priority = 13)
     public void TC004_VerifySelectBackupCodeDisplayed() {
-        Boolean isDisplayed = signInPages.selectBackupCodeIsPresent();
+        boolean isDisplayed = signInPages.selectBackupCodeIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 14)
@@ -79,28 +94,33 @@ public class MailTests extends MailTestsSetup {
     }
     @Test(priority = 15)
     public void TC005_VerifyInputBackupCodeDisplayed() {
-        Boolean isDisplayed = signInPages.backupCodeInputIsPresent();
+        boolean isDisplayed = signInPages.backupCodeInputIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 16)
     public void TC005_VerifyNextButtonDisplayed() {
-        Boolean isDisplayed = signInPages.nextButtonIsPresent();
+        boolean isDisplayed = signInPages.nextButtonIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 17)
     public void TC005_VerifyEmptyBackupCodeInputError() {
         signInPages.clickNext();
-        Boolean isDisplayed = signInPages.backupCodeInputErrorIsPresent();
+        boolean isDisplayed = signInPages.backupCodeInputErrorIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 18)
     public void TC005_InputBackupCode() {
+        String currentURL = signInPages.getURL();
         signInPages.enterBackupCode(backupCode);
         signInPages.clickNext();
+        String nextURL = inboxPages.getUrl();
+
+        boolean isValid = currentURL.equals(nextURL);
+        Assert.assertFalse(isValid);
     }
     @Test(priority = 19)
     public void TC006_VerifySearchBarDisplayed() {
-        Boolean isDisplayed = inboxPages.searchBarIsPresent();
+        boolean isDisplayed = inboxPages.searchBarIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 20)

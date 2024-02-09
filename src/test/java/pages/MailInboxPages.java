@@ -46,7 +46,7 @@ public class MailInboxPages {
     }
 
     // Checking if element is present
-    public Boolean searchBarIsPresent() {
+    public boolean searchBarIsPresent() {
         return searchBar.isDisplayed();
     }
 }

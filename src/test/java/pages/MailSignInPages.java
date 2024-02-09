@@ -28,15 +28,17 @@ public class MailSignInPages {
     WebElement nextButton;
     @FindBys({@FindBy(xpath = "//span[text()='Try another way']"), @FindBy(xpath = "./ancestor::button")})
     WebElement tryAnotherWayButton;
+    @FindBys({@FindBy(xpath = "//span[text()='Resend it']"), @FindBy(xpath = "./ancestor::button")})
+    WebElement resendItButton;
     @FindBy(xpath = "//*[contains(text(), 'Enter one of your 8-digit backup codes')]")
     WebElement selectBackupCodeButton;
 
     // Text Elements
     @FindBy(xpath = "//h1[@id='headingText']/span")
     WebElement title;
-    @FindBy(xpath = "//span[text()='Enter an email or phone number']")
+    @FindBy(xpath = "//div[text()='Enter an email or phone number']")
     WebElement emailInputError;
-    @FindBy(xpath = "//span[text()='Enter a code']")
+    @FindBy(xpath = "//div[text()='Enter a code']")
     WebElement backupCodeInputError;
 
     public MailSignInPages(WebDriver driver) {
@@ -64,6 +66,7 @@ public class MailSignInPages {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
     public void clickTryAnotherWay() {
+        wait.until(ExpectedConditions.elementToBeClickable(resendItButton));
         waitClick(tryAnotherWayButton);
     }
     public void clickSelectBackupCode() {
@@ -78,33 +81,36 @@ public class MailSignInPages {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
         return title.getText();
     }
+    public String getURL() {
+        return driver.getCurrentUrl();
+    }
 
     // Checking if element is present
-    public Boolean isPresent(WebElement element) {
+    public boolean isPresent(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
-    public Boolean nextButtonIsPresent() {
+    public boolean nextButtonIsPresent() {
         return isPresent(nextButton);
     }
-    public Boolean emailInputIsPresent() {
+    public boolean emailInputIsPresent() {
         return isPresent(emailInput);
     }
-    public Boolean passwordInputIsPresent() {
+    public boolean passwordInputIsPresent() {
         return isPresent(passwordInput);
     }
-    public Boolean tryAnotherWayIsPresent() {
+    public boolean tryAnotherWayIsPresent() {
         return isPresent(tryAnotherWayButton);
     }
-    public Boolean selectBackupCodeIsPresent() {
+    public boolean selectBackupCodeIsPresent() {
         return isPresent(selectBackupCodeButton);
     }
-    public Boolean backupCodeInputIsPresent() {
+    public boolean backupCodeInputIsPresent() {
         return isPresent(backupCodeInput);
     }
-    public Boolean emailInputErrorIsPresent() {
+    public boolean emailInputErrorIsPresent() {
         return isPresent(emailInputError);
     }
-    public Boolean backupCodeInputErrorIsPresent() {
+    public boolean backupCodeInputErrorIsPresent() {
         return isPresent(backupCodeInputError);
     }
 
