@@ -17,13 +17,14 @@ public class MailTestsSetup {
     protected String email;
     protected String password;
     protected String backupCode;
+    protected boolean tooManyFailedAttempts;
 
     // Constructor
     public MailTestsSetup() {
         this.url = "https://mail.google.com/mail/";
         this.email = "avgautomationenjoyer@gmail.com";
         this.password = "automationenjoyer123";
-        this.backupCode = "48127917";
+        this.backupCode = "89821065";
     }
 
     // Config

@@ -107,9 +107,6 @@ public class MailSignInPages {
     public String getChooseSignInMethodText() {
         return textVisible(chooseSignInMethodText);
     }
-    public String getURL() {
-        return driver.getCurrentUrl();
-    }
 
     // Checking if element is present
     public boolean isPresent(WebElement element) {
