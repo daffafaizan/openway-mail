@@ -34,6 +34,8 @@ public class MailSignInPages {
     // Text Elements
     @FindBy(xpath = "//h1[@id='headingText']/span")
     WebElement title;
+    @FindBy(xpath = "//span[text()='Enter an email or phone number']")
+    WebElement emailInputError;
 
     public MailSignInPages(WebDriver driver) {
         this.driver = driver;
@@ -41,6 +43,7 @@ public class MailSignInPages {
         PageFactory.initElements(driver, this);
     }
 
+    // Entering input
     public void waitEnterInput(WebElement element, String input) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).sendKeys(input);
     }
@@ -54,6 +57,7 @@ public class MailSignInPages {
         waitEnterInput(backupCodeInput, backupCode);
     }
 
+    // Clicking
     public void waitClick(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
@@ -67,7 +71,23 @@ public class MailSignInPages {
         waitClick(nextButton);
     }
 
+    // Grabbing text
     public String getTitle() {
         return title.getText();
     }
+
+    // Checking if element is present
+    public Boolean nextButtonIsPresent() {
+        return nextButton.isDisplayed();
+    }
+    public Boolean emailInputIsPresent() {
+        return emailInput.isDisplayed();
+    }
+    public Boolean passwordInputIsPresent() {
+        return passwordInput.isDisplayed();
+    }
+    public Boolean emailInputErrorIsPresent() {
+        return emailInputError.isDisplayed();
+    }
+
 }

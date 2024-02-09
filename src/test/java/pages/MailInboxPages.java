@@ -34,7 +34,7 @@ public class MailInboxPages {
         wait.until(ExpectedConditions.elementToBeClickable(searchBar)).sendKeys(query, Keys.RETURN);
     }
 
-    public void retrieveLatestUnreadTitle() {
+    public void getLatestUnreadTitle() {
         System.out.println("\n===============================================");
         System.out.println("Latest unread email is titled: " + titles.getFirst().getAttribute("innerHTML"));
         System.out.println("===============================================");
