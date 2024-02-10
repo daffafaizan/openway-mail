@@ -7,7 +7,9 @@ import org.testng.annotations.BeforeSuite;
 import pages.MailInboxPages;
 import pages.MailSignInPages;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class MailTestsSetup {
     protected WebDriver driver;
@@ -16,7 +18,7 @@ public class MailTestsSetup {
     protected String url;
     protected String email;
     protected String password;
-    protected String backupCode;
+    protected List<String> backupCodes;
     protected boolean tooManyFailedAttempts;
 
     // Constructor
@@ -24,7 +26,7 @@ public class MailTestsSetup {
         this.url = "https://mail.google.com/mail/";
         this.email = "avgautomationenjoyer@gmail.com";
         this.password = "automationenjoyer123";
-        this.backupCode = "28905589";
+        this.backupCodes = Arrays.asList("54376727", "91277883", "74250944", "63538810");
     }
 
     // Config

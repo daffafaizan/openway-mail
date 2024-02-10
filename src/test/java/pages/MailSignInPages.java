@@ -78,6 +78,9 @@ public class MailSignInPages {
     public void enterBackupCode(String backupCode) {
         waitEnterInput(backupCodeInput, backupCode);
     }
+    public void clearBackupCodeField() {
+        backupCodeInput.clear();
+    }
 
     // Clicking
     public void waitClick(WebElement element) {

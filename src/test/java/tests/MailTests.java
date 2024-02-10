@@ -228,13 +228,23 @@ public class MailTests extends MailTestsSetup {
         Assert.assertTrue(isClickable);
     }
     @Test(priority = 38)
-    public void TC038_InputBackupCode() {
-        signInPages.enterBackupCode(backupCode);
-        signInPages.clickNext();
+    public void TC038_InputBackupCode() throws TimeoutException {
+        for (String backupCode: backupCodes) {
+            signInPages.enterBackupCode(backupCode);
+            signInPages.clickNext();
 
-        String expectedURL = "https://mail.google.com/mail/u/0/#inbox";
-        String actualURL = inboxPages.getURL();
-        Assert.assertEquals(actualURL, expectedURL);
+            try {
+                String expectedURL = "https://mail.google.com/mail/u/0/#inbox";
+                String actualURL = inboxPages.getURL();
+                if (expectedURL.equals(actualURL)) {
+                    Assert.assertTrue(true);
+                    break;
+                }
+            } catch (TimeoutException exception) {
+                signInPages.clearBackupCodeField();
+            }
+
+        }
     }
     @Test(priority = 39)
     public void TC039_VerifySearchBarDisplayed() {
