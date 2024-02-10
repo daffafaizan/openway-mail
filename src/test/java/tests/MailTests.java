@@ -247,21 +247,90 @@ public class MailTests extends MailTestsSetup {
         }
     }
     @Test(priority = 39)
-    public void TC039_VerifySearchBarDisplayed() {
-        boolean isDisplayed = inboxPages.searchBarIsPresent();
+    public void TC040_VerifyInboxTabDisplayed() {
+        boolean isDisplayed = inboxPages.inboxIsPresent();
         Assert.assertTrue(isDisplayed);
     }
     @Test(priority = 40)
-    public void TC040_VerifySearchBarClickable() {
+    public void TC041_VerifyInboxTabClickable() {
+        boolean isDisplayed = inboxPages.inboxIsClickable();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 41)
+    public void TC041_VerifyStarredTabDisplayed() {
+        boolean isDisplayed = inboxPages.starredIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 42)
+    public void TC042_VerifyStarredTabClickable() {
+        boolean isDisplayed = inboxPages.starredIsClickable();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 43)
+    public void TC043_VerifySnoozedTabDisplayed() {
+        boolean isDisplayed = inboxPages.snoozedIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 44)
+    public void TC044_VerifySnoozedTabClickable() {
+        boolean isDisplayed = inboxPages.snoozedIsClickable();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 45)
+    public void TC045_VerifySentTabDisplayed() {
+        boolean isDisplayed = inboxPages.sentIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 46)
+    public void TC046_VerifySentTabClickable() {
+        boolean isDisplayed = inboxPages.sentIsClickable();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 47)
+    public void TC047_VerifyDraftsTabDisplayed() {
+        boolean isDisplayed = inboxPages.draftsIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 48)
+    public void TC048_VerifyDraftsTabClickable() {
+        boolean isDisplayed = inboxPages.draftsIsClickable();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 49)
+    public void TC049_VerifyMoreDropdownDisplayed() {
+        boolean isDisplayed = inboxPages.moreDropdownIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 50)
+    public void TC050_VerifyMoreDropdownClickable() {
+        boolean isDisplayed = inboxPages.moreDropdownIsClickable();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 51)
+    public void TC051_VerifyIsEmailAvailable() {
+        boolean isAvailable = inboxPages.availableEmails();
+        Assert.assertFalse(isAvailable);
+    }
+    @Test(priority = 52)
+    public void TC052_VerifySearchBarDisplayed() {
+        boolean isDisplayed = inboxPages.searchBarIsPresent();
+        Assert.assertTrue(isDisplayed);
+    }
+    @Test(priority = 53)
+    public void TC053_VerifySearchBarClickable() {
         boolean isClickable = inboxPages.searchBarIsClickable();
         Assert.assertTrue(isClickable);
     }
-    @Test(priority = 41)
-    public void TC041_SearchUnreadEmail() {
+    @Test(priority = 54)
+    public void TC054_SearchUnreadEmail() {
         inboxPages.enterQuery("is:unread");
+
+        boolean isAvailable = inboxPages.availableEmails();
+        Assert.assertFalse(isAvailable);
     }
-    @Test(priority = 42)
-    public void TC042_RetrieveLatestUnreadEmailTitle() {
-        inboxPages.getLatestUnreadTitle();
+    @Test(priority = 55)
+    public void TC055_RetrieveLatestUnreadEmailTitle() {
+        String title = inboxPages.getLatestUnreadTitle();
+        Assert.assertNotNull(title);
     }
 }
