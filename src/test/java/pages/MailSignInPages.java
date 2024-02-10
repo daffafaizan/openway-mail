@@ -61,7 +61,7 @@ public class MailSignInPages {
 
     public MailSignInPages(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(this.driver, Duration.ofMillis(10000));
+        this.wait = new WebDriverWait(this.driver, Duration.ofMillis(8000));
         PageFactory.initElements(driver, this);
     }
 

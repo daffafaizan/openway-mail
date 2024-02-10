@@ -26,7 +26,7 @@ public class MailInboxPages {
 
     public MailInboxPages(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofMillis(10000));
+        this.wait = new WebDriverWait(driver, Duration.ofMillis(6000));
         PageFactory.initElements(driver, this);
     }
 
